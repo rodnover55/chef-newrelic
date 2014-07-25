@@ -4,7 +4,7 @@ package 'newrelic-php5'
 
 case node["platform"]
   when "debian", "ubuntu"
-    php_custom_config_path = '/etc/php5/conf.d/50-newrelic.ini'
+    php_custom_config_path = '/etc/php5/conf.d/newrelic.ini'
     service = 'service[apache2]'
   when 'redhat', 'centos', 'fedora'
     php_custom_config_path = '/etc/php.d/newrelic.ini'
