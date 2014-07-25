@@ -1,7 +1,6 @@
 include_recipe 'newrelic::repository'
 
 package 'newrelic-php5'
-execute 'newrelic-install install'
 
 case node["platform"]
   when "debian", "ubuntu"
@@ -17,4 +16,11 @@ directory File.dirname(php_custom_config_path)
 template php_custom_config_path do
   source 'newrelic.ini.erb'
   notifies :restart, service, :delayed
+  action :nothing
 end
+
+
+execute 'newrelic-install install' do
+  notifies :create, "template[#{php_custom_config_path}]", :immediately
+end
+
