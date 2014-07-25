@@ -21,6 +21,9 @@ end
 
 
 execute 'newrelic-install install' do
+  environment({
+    'NR_INSTALL_SILENT' => 'yes',
+    'NR_INSTALL_KEY' => node['newrelic']['license']})
   notifies :create, "template[#{php_custom_config_path}]", :immediately
 end
 
